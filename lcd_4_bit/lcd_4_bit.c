@@ -1,8 +1,9 @@
 #include<reg51.h>
-
+#define lcd_port P2
 sbit RS=P0^0;
 sbit EN=P0^1;
-sfr  lcd_port=0X05;
+
+
 
 void lcd_ini();
 void lcd_command(unsigned char);
@@ -32,31 +33,53 @@ while(1)
 
 void lcd_ini()
 {
+	lcd_command(0x38);
+	lcd_command(0x83);
+	lcd_command(0x03);
+	lcd_command(0x82);
+	lcd_command(0x02);
 	lcd_command(0x28);
-	delay_ms(30);
-	lcd_command(0x0F);
-	delay_ms(10);
-	lcd_command(0x06);
-	delay_ms(10);
+	lcd_command(0x28);
+	lcd_command(0x10);
 	lcd_command(0x01);
-	delay_ms(10);
+	lcd_command(0x0F);
+	lcd_command(0x0C);
+	lcd_command(0x06);
+	lcd_command(0x01);
+	lcd_command(0x80);
 
 } 
 
 void lcd_command(unsigned char command)
 {
 	RS=0;
-	lcd_port=command;
+	lcd_port = command & 0XF0;
 	EN=1;
+	lcd_port = command & 0XF0;
 	EN=0;
+	delay_ms(1);
+
+	lcd_port = ((command & 0X0F)<<4);
+	EN=1;
+	lcd_port = ((command & 0X0F)<<4);
+	EN=0;
+	delay_ms(1);
 }
 
 void lcd_display(unsigned char display)
 {
 	RS=1;
-	lcd_port=display;
+	lcd_port= display & 0XF0;
 	EN=1;
+	lcd_port= display & 0XF0;
 	EN=0;
+	delay_ms(1);
+
+	lcd_port=((display & 0X0F)<<4);
+	EN=1;
+	lcd_port=((display & 0X0F)<<4);
+	EN=0;
+	delay_ms(1);
 }
 
 void delay_ms(unsigned int x)
@@ -71,28 +94,9 @@ void lcd_string(unsigned char* name)
 {
 	while(*name!='\0')
 	{
-		lcd_port(*name)
+		lcd_display(*name);
 		name++;
 	}
 		
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
