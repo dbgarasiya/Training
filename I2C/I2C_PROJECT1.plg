@@ -7,3 +7,29 @@ D:\Dipak's Traning\I2C\I2C_PROJECT1.uvproj
 Project File Date:  05/28/2016
 
 <h2>Output:</h2>
+Build target 'Target 1'
+compiling I2C_PROJECT.C...
+I2C_PROJECT.C(2): error C202: 'P2': undefined identifier
+I2C_PROJECT.C(3): error C202: 'P2': undefined identifier
+I2C_PROJECT.C(9): error C136: 'main': 'void' on variable
+I2C_PROJECT.C(9): error C129: missing ';' before '{'
+Target not created
+Build target 'Target 1'
+compiling I2C_PROJECT.C...
+I2C_PROJECT.C(2): error C202: 'P2': undefined identifier
+I2C_PROJECT.C(3): error C202: 'P2': undefined identifier
+I2C_PROJECT.C(11): error C141: syntax error near 'unsigned'
+I2C_PROJECT.C(31): error C236: '_send_data': different length of parameter lists
+I2C_PROJECT.C(32): error C141: syntax error near ','
+I2C_PROJECT.C(32): error C202: 'ack_bit': undefined identifier
+I2C_PROJECT.C(33): error C202: 'i': undefined identifier
+I2C_PROJECT.C(37): error C141: syntax error near 'data'
+I2C_PROJECT.C(37): error C141: syntax error near 'x'
+I2C_PROJECT.C(37): error C202: 'x': undefined identifier
+I2C_PROJECT.C(39): error C141: syntax error near 'data'
+I2C_PROJECT.C(43): error C202: 'ack_bit': undefined identifier
+I2C_PROJECT.C(51): error C141: syntax error near ';'
+I2C_PROJECT.C(52): error C202: 'i': undefined identifier
+I2C_PROJECT.C(55): error C141: syntax error near 'data'
+I2C_PROJECT.C(56): error C141: syntax error near 'data'
+Target not created
