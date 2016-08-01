@@ -1,0 +1,248 @@
+C51 COMPILER V8.12   DIS                                                                   07/20/2016 13:57:33 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE DIS
+OBJECT MODULE PLACED IN DIS.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE DIS.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include "lcd_4bit.h"                                                                                                                   // Including header file 
+   3          
+   4          sbit relay_1=P2^0;                                                                                                                              // 8 relay is connected on port 2
+   5          sbit relay_2=P2^1;
+   6          sbit relay_3=P2^2;
+   7          sbit relay_4=P2^3;
+   8          sbit relay_5=P2^4;
+   9          sbit relay_6=P2^5;
+  10          sbit relay_7=P2^6;
+  11          sbit relay_8=P2^7;
+  12          
+  13          sbit sensor_1=P0^0;                                                                                                                             // sensors are connected on port 0
+  14          sbit sensor_2=P0^1;
+  15          sbit sensor_3=P0^2;
+  16          sbit sensor_4=P0^3;
+  17          sbit sensor_5=P0^4;
+  18          sbit sensor_6=P0^5;
+  19          sbit sensor_7=P0^6;
+  20          sbit sensor_8=P0^7;
+  21          
+  22          sbit switch_pin=P3^2;
+  23          
+  24          Serial_init();
+  25          void delay();
+  26          void send_string(unsigned char *display,unsigned int);
+  27          main()
+  28          {
+  29   1              IE = 0x81;
+  30   1              P0=0XFF;
+  31   1              P2=0XFF;
+  32   1              switch_pin=1;
+  33   1              Serial_init();
+  34   1              while (1)
+  35   1              {
+  36   2                              while(sensor_1==0 && relay_1==0)                                                                        // If door1 is opens remaining doors are closed
+  37   2                              {
+  38   3                              
+  39   3                                      send_string("Door 1 is Opening",1);                                                             // Display on lcd
+  40   3                                      relay_2=relay_3=relay_4=relay_5=relay_6=relay_7=relay_8=1;
+  41   3                                      sensor_2=sensor_3=sensor_4=sensor_5=sensor_6=sensor_7=sensor_8=1;
+  42   3                                      
+  43   3                                      delay();                                                                                                                // Timer of 5 minutes 
+  44   3                                      if(sensor_1==0 && relay_1==0)                                                                   // if door remains opened by mistake then,
+  45   3                                      {                                                                                                                               // closed doors are unlocked after 5 minutes                                    relay_2=relay_3=relay_4=relay_5=rela
+             -y_6=relay_7=relay_8=0;
+  46   4                                              sensor_2=sensor_3=sensor_4=sensor_5=sensor_6=sensor_7=sensor_8=0;       
+  47   4                                              
+  48   4                                      }
+  49   3                              }
+  50   2                              while(sensor_2==0 && relay_2==0)                                                                        // If door2 is opens remaining doors are closed
+  51   2                              {
+  52   3                      
+  53   3                                      send_string("Door 2 is Opening",1);                                                             // Display on lcd
+  54   3                                      relay_1=relay_3=relay_4=relay_5=relay_6=relay_7=relay_8=1;
+C51 COMPILER V8.12   DIS                                                                   07/20/2016 13:57:33 PAGE 2   
+
+  55   3                                      sensor_1=sensor_3=sensor_4=sensor_5=sensor_6=sensor_7=sensor_8=1;
+  56   3                                      
+  57   3                                      delay();                                                                                                                // Timer of 5 minutes
+  58   3                                      if(sensor_2==0 && relay_2==0)                                                                   // if door remains opened by mistake then,
+  59   3                                      {                                                                                                                               // closed doors are unlocked after 5 minutes
+  60   4                                              relay_1=relay_3=relay_4=relay_5=relay_6=relay_7=relay_8=0;
+  61   4                                              sensor_1=sensor_3=sensor_4=sensor_5=sensor_6=sensor_7=sensor_8=0;
+  62   4                                      }
+  63   3                              }
+  64   2                              while(sensor_3==0 && relay_3==0)                                                                        // If door3 is opens remaining doors are closed
+  65   2                              {
+  66   3                              
+  67   3                                      send_string("Door 3 is Opening",1);                                                             // Display on lcd
+  68   3                                      relay_1=relay_2=relay_4=relay_5=relay_6=relay_7=relay_8=1;
+  69   3                                      sensor_1=sensor_2=sensor_4=sensor_5=sensor_6=sensor_7=sensor_8=1;
+  70   3                                      
+  71   3                                      delay();                                                                                                                // Timer of 5 minutes
+  72   3                                      if(sensor_3==0 && relay_3==0)                                                                   // if door remains opened by mistake then,
+  73   3                                      {                                                                                                                               // closed doors are unlocked after 5 minutes
+  74   4                                              relay_1=relay_2=relay_4=relay_5=relay_6=relay_7=relay_8=0;
+  75   4                                              sensor_1=sensor_2=sensor_4=sensor_5=sensor_6=sensor_7=sensor_8=0;
+  76   4                                      }
+  77   3                              }
+  78   2                              while(sensor_4==0 && relay_4==0)                                                                        // If door4 is opens remaining doors are closed
+  79   2                              {
+  80   3                                      
+  81   3                                      send_string("Door 4 is Opening",1);                                                             // Display on lcd
+  82   3                                      relay_1=relay_2=relay_3=relay_5=relay_6=relay_7=relay_8=1;
+  83   3                                      sensor_1=sensor_2=sensor_3=sensor_5=sensor_6=sensor_7=sensor_8=1;
+  84   3                                      
+  85   3                                      delay();                                                                                                                // Timer of 5 minutes
+  86   3                                      if(sensor_4==0 && relay_4==0)                                                                   // if door remains opened by mistake then,
+  87   3                                      {                                                                                                                               // closed doors are unlocked after 5 minutes
+  88   4                                              relay_1=relay_2=relay_3=relay_5=relay_6=relay_7=relay_8=0;
+  89   4                                              sensor_1=sensor_2=sensor_3=sensor_5=sensor_6=sensor_7=sensor_8=0;       
+  90   4                                      }
+  91   3                              }
+  92   2                              while(sensor_5==0 && relay_5==0)                                                                        // If door5 is opens remaining doors are closed
+  93   2                              {
+  94   3                              
+  95   3                                      send_string("Door 5 is Opening",1);                                                             // Display on lcd
+  96   3                                      relay_1=relay_2=relay_3=relay_4=relay_6=relay_7=relay_8=1;
+  97   3                                      sensor_1=sensor_2=sensor_3=sensor_4=sensor_6=sensor_7=sensor_8=1;
+  98   3                                      
+  99   3                                      delay();                                                                                                                // Timer of 5 minutes
+ 100   3                                      if(sensor_5==0 && relay_5==0)                                                                   // if door remains opened by mistake then,
+ 101   3                                      {                                                                                                                               // closed doors are unlocked after 5 minutes
+ 102   4                                              relay_1=relay_2=relay_3=relay_4=relay_6=relay_7=relay_8=0;
+ 103   4                                              sensor_1=sensor_2=sensor_3=sensor_4=sensor_6=sensor_7=sensor_8=0;       
+ 104   4                                      }
+ 105   3                              }
+ 106   2                              while(sensor_6==0 && relay_6==0)                                                                        // If door6 is opens remaining doors are closed
+ 107   2                              {
+ 108   3                                      
+ 109   3                                      send_string("Door 6 is Opening",1);                                                             // Display on lcd
+ 110   3                                      relay_1=relay_2=relay_3=relay_4=relay_5=relay_7=relay_8=1;
+ 111   3                                      sensor_1=sensor_2=sensor_3=sensor_4=sensor_5=sensor_7=sensor_8=1;
+ 112   3                                      
+ 113   3                                      delay();                                                                                                                // Timer of 5 minutes
+ 114   3                                      if(sensor_6==0 && relay_6==0)                                                                   // if door remains opened by mistake then,
+ 115   3                                      {                                                                                                                               // closed doors are unlocked after 5 minutes
+ 116   4                                              relay_1=relay_2=relay_3=relay_4=relay_5=relay_7=relay_8=0;
+C51 COMPILER V8.12   DIS                                                                   07/20/2016 13:57:33 PAGE 3   
+
+ 117   4                                              sensor_1=sensor_2=sensor_3=sensor_4=sensor_5=sensor_7=sensor_8=0;
+ 118   4                                      }                                                                                               
+ 119   3                              }
+ 120   2                              while(sensor_7==0 && relay_7==0)                                                                        // If door7 is opens remaining doors are closed
+ 121   2                              {
+ 122   3                              
+ 123   3                                      send_string("Door 7 is Opening",1);                                                             // Display on lcd
+ 124   3                                      relay_1=relay_2=relay_3=relay_4=relay_5=relay_6=relay_8=1;
+ 125   3                                      sensor_1=sensor_2=sensor_3=sensor_4=sensor_5=sensor_6=sensor_8=1;
+ 126   3                                      
+ 127   3                                      delay();                                                                                                                // Timer of 5 minutes
+ 128   3                                      if(sensor_7==0 && relay_7==0)                                                                   // if door remains opened by mistake then,
+ 129   3                                      {                                                                                                                               // closed doors are unlocked after 5 minutes
+ 130   4                                              relay_1=relay_2=relay_3=relay_4=relay_5=relay_6=relay_8=0;
+ 131   4                                              sensor_1=sensor_2=sensor_3=sensor_4=sensor_5=sensor_6=sensor_8=0;       
+ 132   4                                      }
+ 133   3                              }
+ 134   2                              while(sensor_8==0 && relay_8==0)                                                                        // If door8 is opens remaining doors are closed
+ 135   2                              {       
+ 136   3                                      
+ 137   3                                      send_string("Door 8 is Opening",1);                                                             // Display on lcd
+ 138   3                                      relay_1=relay_2=relay_3=relay_4=relay_5=relay_6=relay_7=1;
+ 139   3                                      sensor_1=sensor_2=sensor_3=sensor_4=sensor_5=sensor_6=sensor_7=1;
+ 140   3                                      
+ 141   3                                      delay();                                                                                                                // Timer of 5 minutes
+ 142   3                                      if(sensor_8==0 && relay_8==0)                                                                   // if door remains opened by mistake then,
+ 143   3                                      {                                                                                                                               // closed doors are unlocked after 5 minutes
+ 144   4                                              relay_1=relay_2=relay_3=relay_4=relay_5=relay_6=relay_7=0;
+ 145   4                                              sensor_1=sensor_2=sensor_3=sensor_4=sensor_5=sensor_6=sensor_7=0;       
+ 146   4                                      }
+ 147   3                              }
+ 148   2                      
+ 149   2              }
+ 150   1      }
+*** ERROR C237 IN LINE 150 OF DIS.C: 'main': function already has a body
+ 151          void delay()                                                                                                                                    // Function to generate 5 minutes of delay
+ 152          {
+ 153   1              int count,sec;
+ 154   1              for(sec=0;sec<300;sec++)
+ 155   1              {
+ 156   2                      count=0;
+ 157   2                      while(count!=50)                                                
+ 158   2                      {
+ 159   3                              TMOD=0X01;                                                                                                              // 16- bit timer0 selected                      
+ 160   3                              TH0=0xB8;                                                                                                                       // Calculation= delay(half time) /(6/11.0592Mhz)=value  
+ 161   3                              TL0=0x12;                                                                                                                       // 65535-value= timer value , now  put timer value in Hex in TH0(Higher byte) a
+             -nd TL0(Lower byte)
+ 162   3                              TR0=1;                                                                                                                          // Running  the timer
+ 163   3                              while(!TF0);                                                                                                            // Checking the timer flag register if it is not equal to 1
+ 164   3              
+ 165   3                              TR0 = 0;                                                                                                                        // If TF0=1 STOP TIMER                                                                                                                                  // stop timer
+ 166   3                              TF0 = 0;                                                                                                                        // Clear timer flag bit for next calculation
+ 167   3                              count++;
+ 168   3                      }
+ 169   2              }
+ 170   1      }
+ 171          Serial_init()                                                                                                                                   // Baud-rate of 9600 serial communication
+ 172          {
+ 173   1              TMOD |= 0x20;
+ 174   1              SCON = 0x50;
+ 175   1              TH1  = -3;                                                                                                                                      // Load value to TH1
+ 176   1              TR1  = 1;
+C51 COMPILER V8.12   DIS                                                                   07/20/2016 13:57:33 PAGE 4   
+
+ 177   1              TI = 1;
+ 178   1      }
+ 179          void send_string(unsigned char *display,unsigned int n)                                                 // Function to send  STRING 
+ 180          {
+ 181   1      
+ 182   1              switch(n)
+ 183   1              {
+ 184   2                      case 1:while(*display!='\0')                                                                                    // Display on LCD
+ 185   2                                              {
+ 186   3                                                      lcd_display(*display);
+ 187   3                                                      display++;
+ 188   3                                              }
+ 189   2                                      break;
+ 190   2                                      
+ 191   2                      case 2:while(*display!='\0')                                                                                    // FOR UART
+ 192   2                                              {
+ 193   3                                                      putchar(*display)
+ 194   3                                                      display++;
+ 195   3                                              }
+ 196   2                                      break;
+ 197   2                      
+ 198   2              }
+ 199   1      }
+ 200          void ISR_ex0(void) interrupt 0                                                                                                  // Exeternal interrupt for Emergency
+ 201          {
+ 202   1              if(switch_pin==0)
+ 203   1              {
+ 204   2                      relay_1=relay_2=relay_3=relay_4=relay_5=relay_6=relay_7=relay_8=0;      
+ 205   2              }
+ 206   1              
+ 207   1      }
+ 208          
+ 209          
+ 210          
+ 211          
+ 212          
+ 213          
+ 214          
+ 215          
+ 216          
+ 217          
+ 218          
+ 219          
+ 220          
+ 221          
+ 222          
+ 223          
+ 224          
+ 225          
+ 226          
+ 227          
+ 228          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

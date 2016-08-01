@@ -1,0 +1,93 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/14/2016  09:12:52  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE interrupt.obj TO interrupt
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  interrupt.obj (INTERRUPT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  interrupt (INTERRUPT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?INTERRUPT
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+                    0006H     07FAH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0016H     UNIT         ?PR?ISR0?INTERRUPT
+            CODE    08A2H     0013H     UNIT         ?PR?MAIN?INTERRUPT
+            CODE    08B5H     0005H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   interrupt (INTERRUPT)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?INTERRUPT
+  +--> ?C_INITSEG
+
+
+
+SYMBOL TABLE OF MODULE:  interrupt (INTERRUPT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        INTERRUPT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00A8H         PUBLIC        IE
+  C:088CH         PUBLIC        ISR0
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/14/2016  09:12:52  PAGE 2
+
+
+  C:08A2H         PUBLIC        main
+  D:0088H         PUBLIC        TCON
+  B:0090H.7       PUBLIC        LED
+  D:0008H         PUBLIC        a
+  -------         PROC          MAIN
+  C:08A2H         LINE#         7
+  C:08A2H         LINE#         8
+  C:08A2H         LINE#         9
+  C:08A5H         LINE#         10
+  C:08A8H         LINE#         12
+  C:08B0H         LINE#         14
+  C:08B0H         LINE#         15
+  C:08B0H         LINE#         16
+  C:08B3H         LINE#         17
+  -------         ENDPROC       MAIN
+  -------         PROC          ISR0
+  C:088CH         LINE#         20
+  C:0890H         LINE#         22
+  C:0898H         LINE#         23
+  C:089DH         LINE#         24
+  -------         ENDPROC       ISR0
+  -------         ENDMOD        INTERRUPT
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0030H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=11.0 xdata=0 code=192
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
